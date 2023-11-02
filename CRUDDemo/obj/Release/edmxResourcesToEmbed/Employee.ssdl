@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FishModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="LogSession">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Username" Type="varchar" MaxLength="50" />
+    <Property Name="Token" Type="varchar" MaxLength="250" />
+    <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
+    <Property Name="CreatedOn" Type="datetime" />
+    <Property Name="ModifiedBy" Type="varchar" MaxLength="50" />
+    <Property Name="ModifiedOn" Type="datetime" />
+  </EntityType>
+  <EntityType Name="mstEmployee">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NIK" Type="varchar" MaxLength="16" />
+    <Property Name="EmployeeName" Type="varchar" MaxLength="40" />
+    <Property Name="EmployeeAddress" Type="varchar" MaxLength="300" />
+    <Property Name="MarriedStatus" Type="varchar" MaxLength="30" />
+    <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
+    <Property Name="CreatedOn" Type="datetime" />
+    <Property Name="ModifiedBy" Type="varchar" MaxLength="50" />
+    <Property Name="ModifiedOn" Type="datetime" />
+  </EntityType>
+  <EntityType Name="mstItem">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="ItemName" Type="varchar" MaxLength="30" />
+    <Property Name="ItemType" Type="varchar" MaxLength="50" />
+    <Property Name="Stock" Type="int" />
+    <Property Name="Price" Type="money" />
+    <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
+    <Property Name="CreatedOn" Type="datetime" />
+    <Property Name="ModifiedBy" Type="varchar" MaxLength="50" />
+    <Property Name="ModifiedOn" Type="datetime" />
+  </EntityType>
+  <EntityType Name="mstUser">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Username" Type="varchar" MaxLength="30" />
+    <Property Name="Email" Type="varchar" MaxLength="39" />
+    <Property Name="BirthDate" Type="datetime" />
+    <Property Name="UserRole" Type="varchar" MaxLength="10" />
+    <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
+    <Property Name="CreatedOn" Type="datetime" />
+    <Property Name="ModifiedBy" Type="varchar" MaxLength="50" />
+    <Property Name="ModifiedOn" Type="datetime" />
+  </EntityType>
+  <Function Name="Usp_Find_MstEmployee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="employee_name" Type="varchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="FishModelStoreContainer">
+    <EntitySet Name="LogSession" EntityType="Self.LogSession" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="mstEmployee" EntityType="Self.mstEmployee" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="mstItem" EntityType="Self.mstItem" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="mstUser" EntityType="Self.mstUser" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>
