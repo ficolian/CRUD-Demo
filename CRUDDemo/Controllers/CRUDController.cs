@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using PagedList;
+using System.Web.UI;
 
 
 namespace CRUDDemo.Controllers
@@ -32,10 +33,10 @@ namespace CRUDDemo.Controllers
         }
 
         [HttpGet] // Set the attribute to Read
-        public ActionResult Read(string employeeName, string sortOrder)
+        public ActionResult Read(string employeeName, string sortOrder, int? page)
         {
             ViewData["CurrentFilter"] = employeeName;
-            //ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name" : "";
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name" : "";
             using (var context = new FishEntities())
             {
                 var data = context.mstEmployees.ToList(); // Return the list of data from the database
@@ -43,11 +44,17 @@ namespace CRUDDemo.Controllers
                 if (!String.IsNullOrEmpty(employeeName))
                 {
                     data = data.Where(x=> x.EmployeeName.ToLower().Contains(employeeName.ToLower())).ToList();
-                    return View(data);
+                    int pageSize = 2;
+                    int pageNumber = (page ?? 1);
+                    return View(data.ToPagedList(pageNumber, pageSize));
+                    //return View(data);
                 }
                 else
                 {
-                    return View(data);
+                    int pageSize = 2;
+                    int pageNumber = (page ?? 1);
+                    return View(data.ToPagedList(pageNumber, pageSize));
+                    //return View(data);
                 }
             }
         }

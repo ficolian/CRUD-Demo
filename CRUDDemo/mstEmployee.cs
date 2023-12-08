@@ -23,4 +23,9 @@ namespace CRUDDemo
         public string ModifiedBy { get; set; }
         public DateTime? ModifiedOn { get; set; }
     }
+    public enum MarriedStatusList
+    {
+        Married,
+        Single
+    }
 }
